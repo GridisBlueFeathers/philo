@@ -6,10 +6,16 @@
 /*   By: svereten <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 17:45:34 by svereten          #+#    #+#             */
-/*   Updated: 2024/09/26 17:46:03 by svereten         ###   ########.fr       */
+/*   Updated: 2025/02/28 15:11:38 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PHILO_H
 # define PHILO_H
+
+typedef	struct	s_data
+{
+	int	hey;
+
+}	t_data;
 
 #endif
