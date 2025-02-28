@@ -6,7 +6,7 @@
 #    By: svereten <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/26 15:06:44 by svereten          #+#    #+#              #
-#    Updated: 2025/02/28 15:22:31 by svereten         ###   ########.fr        #
+#    Updated: 2025/02/28 16:02:59 by svereten         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ################################################################################
@@ -28,8 +28,13 @@ LDFLAGS =
 SRC_DIR = src
 OBJ_DIR = obj
 
-FILES = main
+FILES = main \
+		utils/putstr_fd \
+		utils/ft_strlen \
+		utils/ft_isdigit \
+		utils/str_is_number \
 
+SRCS = ${FILES:%=${SRC_DIR}/%.c}
 OBJS = ${FILES:%=${OBJ_DIR}/%.o}
 
 OBJ_DIRS = ${sort ${dir ${OBJS}}}
@@ -67,7 +72,10 @@ re: fclean all
 #
 ################################################################################
 
-run:
-	@./${NAME}
+norm:
+	norminette ${SRCS}
+
+run: ${NAME}
+	@./${NAME} ${ARGS}
 
 .PHONY: all clean fclean re
