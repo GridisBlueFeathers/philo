@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_is_number.c                                    :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/28 15:50:41 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/03 10:23:22 by svereten         ###   ########.fr       */
+/*   Created: 2025/03/02 20:41:12 by svereten          #+#    #+#             */
+/*   Updated: 2025/03/03 10:25:30 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "philo.h"
+#include <stdlib.h>
+#include <string.h>
 
-t_bool	str_is_number(char *str)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	uint8_t	i;
+	void	*res;
+	size_t	res_size;
 
-	if (ft_strlen(str) > 10)
-		return (FALSE);
-	i = 0;
-	while (str[i])
-	{
-		if (!ft_isdigit(str[i]))
-			return (FALSE);
-		i++;
-	}
-	return (TRUE);
+	res_size = nmemb * size;
+	if (!nmemb || !size || res_size / nmemb != size)
+		return (NULL);
+	res = malloc(res_size);
+	if (!res)
+		return (NULL);
+	memset(res, 0, res_size);
+	return (res);
 }
