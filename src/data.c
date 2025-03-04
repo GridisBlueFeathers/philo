@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 10:35:31 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/03 10:45:08 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/04 16:02:37 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
@@ -22,11 +22,27 @@ t_data	*data_alloc(void)
 	t_data	*res;
 
 	res = (t_data *)ft_calloc(1, sizeof(t_data));
+	if (!res)
+		return (NULL);
 	return (res);
 }
 
 t_data	*data_free(t_data *data)
 {
+	uint32_t		i;
+	t_philo_node	*cur;
+	t_philo_node	*tmp;
+
+	cur = data->head;
+	i = 0;
+	while (i < data->num)
+	{
+		tmp = cur->next;
+		free(cur->right);
+		free(cur);
+		cur = tmp;
+		i++;
+	}
 	free(data);
 	return (NULL);
 }

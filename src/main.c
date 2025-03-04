@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 17:46:57 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/03 11:02:25 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/04 17:06:12 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
@@ -22,11 +22,17 @@ int32_t	main(int argc, char **argv)
 	}
 	if (!input_processing(argc, argv))
 		return (1);
-	dprintf(STDERR_FILENO, "\x1b[34m""Philos num: %d\n""\x1b[0m", data(GET)->num);
-	dprintf(STDERR_FILENO, "\x1b[34m""Philos ttd: %d\n""\x1b[0m", data(GET)->ttd);
-	dprintf(STDERR_FILENO, "\x1b[34m""Philos tte: %d\n""\x1b[0m", data(GET)->tte);
-	dprintf(STDERR_FILENO, "\x1b[34m""Philos tts: %d\n""\x1b[0m", data(GET)->tts);
-	dprintf(STDERR_FILENO, "\x1b[34m""Times to eat: %d\n""\x1b[0m", data(GET)->times_to_eat);
+	dprintf(STDERR_FILENO, BLUE"Philos num: %d\n"RESET, data(GET)->num);
+	dprintf(STDERR_FILENO, BLUE"Philos ttd: %d\n"RESET, data(GET)->ttd);
+	dprintf(STDERR_FILENO, BLUE"Philos tte: %d\n"RESET, data(GET)->tte);
+	dprintf(STDERR_FILENO, BLUE"Philos tts: %d\n"RESET, data(GET)->tts);
+	dprintf(STDERR_FILENO, BLUE"Times to eat: %d\n"RESET, data(GET)->times_to_eat);
+	if (!create_nodes())
+		return (1);
+	pthread_mutex_lock(&data(GET)->start);
+	create_threads();
+	pthread_mutex_unlock(&data(GET)->start);
+	join_threads();
 }
 #else
 

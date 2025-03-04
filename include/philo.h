@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 17:45:34 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/03 11:02:15 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/04 16:58:23 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PHILO_H
@@ -16,10 +16,14 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <pthread.h>
 
 # ifndef DEBUG
 #  define DEBUG 1
 # endif
+
+# define BLUE "\x1b[34m"
+# define RESET "\x1b[0m"
 
 typedef enum e_bool
 {
@@ -33,13 +37,31 @@ typedef enum e_option
 	FREE,
 }	t_option;
 
+typedef struct s_philo_node
+{
+	struct s_philo_node	*next;
+	struct s_philo_node	*prev;
+	pthread_mutex_t		*right;
+	pthread_mutex_t		*left;
+	pthread_mutex_t		*start;
+	pthread_t			thread;
+	uint32_t			idx;
+	uint32_t			ttd;
+	uint32_t			tts;
+	uint32_t			tte;
+	uint32_t			times_to_eat;
+}	t_philo_node;
+
 typedef struct s_data
 {
-	int32_t	num;
-	int32_t	ttd;
-	int32_t	tts;
-	int32_t	tte;
-	int32_t	times_to_eat;
+	t_philo_node	*head;
+	t_philo_node	*tail;
+	pthread_mutex_t	start;
+	uint32_t		num;
+	uint32_t		ttd;
+	uint32_t		tts;
+	uint32_t		tte;
+	uint32_t		times_to_eat;
 }	t_data;
 
 // data related functions
@@ -47,6 +69,11 @@ typedef struct s_data
 t_data		*data(t_option op);
 
 t_bool		input_processing(int32_t argc, char **argv);
+t_bool		create_nodes(void);
+
+t_bool		create_threads(void);
+void		*routine(void *arg);
+t_bool		join_threads(void);
 
 // Utils
 //
