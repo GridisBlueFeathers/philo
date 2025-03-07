@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 17:45:34 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/04 16:58:23 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/05 15:15:30 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PHILO_H
@@ -25,6 +25,12 @@
 # define BLUE "\x1b[34m"
 # define RESET "\x1b[0m"
 
+# define DIED_LOG "%li %d died\n"
+# define FORK_LOG "%li %d has taken a fork\n"
+# define EATING_LOG "%li %d is eating\n"
+# define SLEEPNG_LOG "%li %d is sleeping\n"
+# define THINKING_LOG "%li %d is thinking\n"
+
 typedef enum e_bool
 {
 	FALSE,
@@ -36,6 +42,15 @@ typedef enum e_option
 	GET,
 	FREE,
 }	t_option;
+
+typedef enum e_print
+{
+	DIED,
+	FORK,
+	EATING,
+	SLEEPING,
+	THINKING
+}	t_print;
 
 typedef struct s_philo_node
 {
@@ -57,11 +72,16 @@ typedef struct s_data
 	t_philo_node	*head;
 	t_philo_node	*tail;
 	pthread_mutex_t	start;
+	pthread_mutex_t	finish_lock;
+	pthread_mutex_t	timer_lock;
+	int64_t		start_time;
+	int64_t			*timers;
+	int64_t			ttd;
 	uint32_t		num;
-	uint32_t		ttd;
 	uint32_t		tts;
 	uint32_t		tte;
 	uint32_t		times_to_eat;
+	t_bool			finish;
 }	t_data;
 
 // data related functions

@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 10:35:31 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/04 16:02:37 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/05 14:33:10 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
@@ -43,6 +43,8 @@ t_data	*data_free(t_data *data)
 		cur = tmp;
 		i++;
 	}
+	if (data->timers)
+		free(data->timers);
 	free(data);
 	return (NULL);
 }

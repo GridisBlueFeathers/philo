@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:57:03 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/04 17:22:03 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/05 15:24:46 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
@@ -25,5 +25,9 @@ void	*routine(void *arg)
 	dprintf(STDERR_FILENO, BLUE"Philo %d is alive\n"RESET, philo->idx + 1);
 	wait_for_start(philo);
 	dprintf(STDERR_FILENO, BLUE"Philo %d has started\n"RESET, philo->idx + 1);
+	while (1)
+	{
+
+	}
 	return (NULL);
 }
