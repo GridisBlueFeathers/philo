@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 10:35:31 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/13 00:17:30 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/13 13:13:04 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
@@ -33,9 +33,11 @@ t_data	*data_free(t_data *data)
 	t_philo_node	*cur;
 	t_philo_node	*tmp;
 
+	if (!data)
+		return (NULL);
 	cur = data->head;
 	i = 0;
-	while (i < data->num)
+	while (cur && i < data->num)
 	{
 		tmp = cur->next;
 		free(cur->right);

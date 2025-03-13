@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 17:45:34 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/13 11:22:49 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/13 12:51:46 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PHILO_H
@@ -84,7 +84,7 @@ typedef struct s_data
 	struct timeval	start_tv;
 	pthread_mutex_t	start;
 	pthread_mutex_t	finish_lock;
-	uint64_t		ttd;
+	uint32_t		ttd;
 	uint32_t		num;
 	uint32_t		tts;
 	uint32_t		tte;
@@ -112,9 +112,10 @@ void		track_finish(void);
 int32_t		putstr_fd(char *str, int fd);
 void		*ft_calloc(size_t nmemb, size_t size);
 uint32_t	ft_strlen(char *str);
+uint8_t		ft_strcmp(char *s1, char *s2);
 t_bool		ft_isdigit(char c);
 t_bool		str_is_number(char *str);
-uint32_t	philo_atoi(char *str);
+t_bool		philo_atoi(char *str, uint32_t *num);
 uint64_t	get_timestamp_ms(struct timeval start);
 void		print_log(t_print op, uint32_t idx, struct timeval start);
 
