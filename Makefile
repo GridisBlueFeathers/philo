@@ -6,7 +6,7 @@
 #    By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/26 15:06:44 by svereten          #+#    #+#              #
-#    Updated: 2025/03/04 16:57:51 by svereten         ###   ########.fr        #
+#    Updated: 2025/03/13 11:09:29 by svereten         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ################################################################################
@@ -33,12 +33,14 @@ FILES = main \
 		node \
 		thread \
 		routine \
+		simulation/init \
 		utils/putstr_fd \
 		utils/ft_strlen \
 		utils/ft_isdigit \
 		utils/ft_calloc \
 		utils/str_is_number \
 		utils/philo_atoi \
+		utils/get_timestamp \
 
 SRCS = ${FILES:%=${SRC_DIR}/%.c}
 OBJS = ${FILES:%=${OBJ_DIR}/%.o}

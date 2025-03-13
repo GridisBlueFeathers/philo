@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 17:45:34 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/05 15:15:30 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/13 11:19:18 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PHILO_H
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <pthread.h>
+# include <sys/time.h>
 
 # ifndef DEBUG
 #  define DEBUG 1
@@ -52,8 +53,17 @@ typedef enum e_print
 	THINKING
 }	t_print;
 
+typedef struct s_timer
+{
+	struct timeval	start_tv;
+	/* Timestamp of start or last eating start */
+	uint64_t		timestamp;
+	pthread_mutex_t	*ts_lock;
+}	t_timer;
+
 typedef struct s_philo_node
 {
+	t_timer				timer;
 	struct s_philo_node	*next;
 	struct s_philo_node	*prev;
 	pthread_mutex_t		*right;
@@ -61,7 +71,6 @@ typedef struct s_philo_node
 	pthread_mutex_t		*start;
 	pthread_t			thread;
 	uint32_t			idx;
-	uint32_t			ttd;
 	uint32_t			tts;
 	uint32_t			tte;
 	uint32_t			times_to_eat;
@@ -71,12 +80,11 @@ typedef struct s_data
 {
 	t_philo_node	*head;
 	t_philo_node	*tail;
+	t_timer			**timers;
+	struct timeval	start_tv;
 	pthread_mutex_t	start;
 	pthread_mutex_t	finish_lock;
-	pthread_mutex_t	timer_lock;
-	int64_t		start_time;
-	int64_t			*timers;
-	int64_t			ttd;
+	uint64_t		ttd;
 	uint32_t		num;
 	uint32_t		tts;
 	uint32_t		tte;
@@ -95,6 +103,10 @@ t_bool		create_threads(void);
 void		*routine(void *arg);
 t_bool		join_threads(void);
 
+void		simulation_init(void);
+
+void		track_finish(void);
+
 // Utils
 //
 int32_t		putstr_fd(char *str, int fd);
@@ -103,5 +115,7 @@ uint32_t	ft_strlen(char *str);
 t_bool		ft_isdigit(char c);
 t_bool		str_is_number(char *str);
 uint32_t	philo_atoi(char *str);
+uint64_t	get_timestamp_ms(struct timeval start);
+void		print_log(t_print op, uint32_t idx, struct timeval start);
 
 #endif
