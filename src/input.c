@@ -6,11 +6,10 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:01:15 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/13 13:07:36 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/19 15:30:10 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
-#include <stdio.h>
 #include <unistd.h>
 
 static t_bool	input_validataion(int32_t argc, char **argv)
@@ -29,22 +28,18 @@ static t_bool	input_validataion(int32_t argc, char **argv)
 	return (TRUE);
 }
 
-t_bool	input_processing(int32_t argc, char **argv)
+t_bool	input_processing(int32_t argc, char **argv, t_data *data)
 {
-	t_data	*ptr;
-
 	if (!input_validataion(argc, argv))
 		return (putstr_fd("Invalid arguments\n", STDERR_FILENO), FALSE);
-	ptr = data(GET);
-	if (!philo_atoi(argv[1], &ptr->num)
-		|| !philo_atoi(argv[2], &ptr->ttd)
-		|| !philo_atoi(argv[3], &ptr->tte)
-		|| !philo_atoi(argv[4], &ptr->tts))
+	if (!philo_atoi(argv[1], &data->num)
+		|| !philo_atoi(argv[2], &data->ttd)
+		|| !philo_atoi(argv[3], &data->tte)
+		|| !philo_atoi(argv[4], &data->tts))
 		return (putstr_fd("Invalid arguments\n", STDERR_FILENO), FALSE);
-	if (argv[5] && !philo_atoi(argv[5], &ptr->times_to_eat))
+	if (argv[5] && !philo_atoi(argv[5], &data->times_to_eat))
 		return (putstr_fd("Invalid arguments\n", STDERR_FILENO), FALSE);
-	ptr->timers = (t_timer **)ft_calloc(data(GET)->num, sizeof(t_timer *));
-	if (!ptr->timers)
-		return (putstr_fd("Invalid arguments\n", STDERR_FILENO), FALSE);
+	if (!data_init(data))
+		return (FALSE);
 	return (TRUE);
 }

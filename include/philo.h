@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 17:45:34 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/13 12:51:46 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/19 15:47:12 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PHILO_H
@@ -53,6 +53,27 @@ typedef enum e_print
 	THINKING
 }	t_print;
 
+typedef struct s_state
+{
+	pthread_mutex_t	*state_lock;
+	t_bool			start;
+	void			(*set_start)(struct s_state *, t_bool);
+	t_bool			(*get_start)(struct s_state *);
+	t_bool			finish;
+	void			(*set_finish)(struct s_state *, t_bool);
+	t_bool			(*get_finish)(struct s_state *);
+	uint32_t		philos_full;
+	t_bool			(*incr_full)(struct s_state *);
+	uint32_t		philos_num;
+}	t_state;
+
+void		set_start(struct s_state *self, t_bool val);
+t_bool		get_start(struct s_state *self);
+void		set_finish(struct s_state *self, t_bool val);
+t_bool		get_finish(struct s_state *self);
+t_bool		incr_full(struct s_state *self);
+t_state		*state_constructor(void);
+
 typedef struct s_timer
 {
 	struct timeval	start_tv;
@@ -61,19 +82,26 @@ typedef struct s_timer
 	pthread_mutex_t	*ts_lock;
 }	t_timer;
 
+typedef struct s_fork
+{
+	pthread_mutex_t	*fork;
+}	t_fork;
+
 typedef struct s_philo_node
 {
 	t_timer				timer;
 	struct s_philo_node	*next;
 	struct s_philo_node	*prev;
-	pthread_mutex_t		*right;
-	pthread_mutex_t		*left;
-	pthread_mutex_t		*start;
+	struct s_data		*data;
+	t_state				*state;
+	pthread_mutex_t		*one;
+	pthread_mutex_t		*two;
 	pthread_t			thread;
 	uint32_t			idx;
 	uint32_t			tts;
 	uint32_t			tte;
 	uint32_t			times_to_eat;
+	uint32_t			times_eaten;
 }	t_philo_node;
 
 typedef struct s_data
@@ -81,23 +109,25 @@ typedef struct s_data
 	t_philo_node	*head;
 	t_philo_node	*tail;
 	t_timer			**timers;
-	struct timeval	start_tv;
-	pthread_mutex_t	start;
-	pthread_mutex_t	finish_lock;
+	t_fork			**forks;
+	t_state			*state;
+	pthread_mutex_t	*data_lock;
+	uint64_t		start_time;
 	uint32_t		ttd;
 	uint32_t		num;
 	uint32_t		tts;
 	uint32_t		tte;
 	uint32_t		times_to_eat;
-	t_bool			finish;
 }	t_data;
 
 // data related functions
 //
+t_bool		forks_init(t_data *data);
+void		forks_free(t_fork **forks);
 t_data		*data(t_option op);
 
-t_bool		input_processing(int32_t argc, char **argv);
-t_bool		create_nodes(void);
+t_bool		input_processing(int32_t argc, char **argv, t_data *data);
+t_bool		create_nodes(t_data *data);
 
 t_bool		create_threads(void);
 void		*routine(void *arg);

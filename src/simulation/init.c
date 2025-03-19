@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 11:08:18 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/13 11:18:42 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/19 13:34:24 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
@@ -30,7 +30,7 @@ static void	start_time_tracking(void)
 void	simulation_init(void)
 {
 	create_threads();
-	pthread_mutex_lock(&data(GET)->start);
+	data(GET)->state->set_start(data(GET)->state, FALSE);
 	start_time_tracking();
-	pthread_mutex_unlock(&data(GET)->start);
+	//data(GET)->state->set_start(data(GET)->state, TRUE);
 }

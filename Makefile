@@ -6,7 +6,7 @@
 #    By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/26 15:06:44 by svereten          #+#    #+#              #
-#    Updated: 2025/03/13 12:53:30 by svereten         ###   ########.fr        #
+#    Updated: 2025/03/19 15:47:25 by svereten         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ################################################################################
@@ -34,6 +34,9 @@ FILES = main \
 		thread \
 		routine \
 		finish \
+		data/forks \
+		state/methods \
+		state/constructor \
 		simulation/init \
 		utils/putstr_fd \
 		utils/ft_strlen \
