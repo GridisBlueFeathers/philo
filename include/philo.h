@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 17:45:34 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/19 15:47:12 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/20 15:51:00 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PHILO_H
@@ -73,6 +73,7 @@ void		set_finish(struct s_state *self, t_bool val);
 t_bool		get_finish(struct s_state *self);
 t_bool		incr_full(struct s_state *self);
 t_state		*state_constructor(void);
+void		state_free(t_state *state);
 
 typedef struct s_timer
 {
@@ -85,6 +86,7 @@ typedef struct s_timer
 typedef struct s_fork
 {
 	pthread_mutex_t	*fork;
+	t_bool			mutex_init;
 }	t_fork;
 
 typedef struct s_philo_node
@@ -98,8 +100,8 @@ typedef struct s_philo_node
 	pthread_mutex_t		*two;
 	pthread_t			thread;
 	uint32_t			idx;
-	uint32_t			tts;
 	uint32_t			tte;
+	uint32_t			tts;
 	uint32_t			times_to_eat;
 	uint32_t			times_eaten;
 }	t_philo_node;
@@ -115,6 +117,7 @@ typedef struct s_data
 	uint64_t		start_time;
 	uint32_t		ttd;
 	uint32_t		num;
+	uint32_t		nodes_num;
 	uint32_t		tts;
 	uint32_t		tte;
 	uint32_t		times_to_eat;
@@ -122,20 +125,23 @@ typedef struct s_data
 
 // data related functions
 //
+t_bool		data_init(t_data *data, int32_t argc, char **argv);
+void		data_free(t_data *data);
 t_bool		forks_init(t_data *data);
 void		forks_free(t_fork **forks);
-t_data		*data(t_option op);
-
+t_bool		nodes_init(t_data *data);
+void		nodes_free(t_data *data);
 t_bool		input_processing(int32_t argc, char **argv, t_data *data);
+
 t_bool		create_nodes(t_data *data);
 
-t_bool		create_threads(void);
+t_bool		create_threads(t_data *data);
 void		*routine(void *arg);
-t_bool		join_threads(void);
+t_bool		join_threads(t_data *data);
 
-void		simulation_init(void);
+void		simulation_init(t_data *data);
 
-void		track_finish(void);
+void		track_finish(t_data *data);
 
 // Utils
 //

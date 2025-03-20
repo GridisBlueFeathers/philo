@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/03 11:01:15 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/19 15:30:10 by svereten         ###   ########.fr       */
+/*   Created: 2025/03/20 15:12:08 by svereten          #+#    #+#             */
+/*   Updated: 2025/03/20 15:14:45 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
@@ -39,7 +39,5 @@ t_bool	input_processing(int32_t argc, char **argv, t_data *data)
 		return (putstr_fd("Invalid arguments\n", STDERR_FILENO), FALSE);
 	if (argv[5] && !philo_atoi(argv[5], &data->times_to_eat))
 		return (putstr_fd("Invalid arguments\n", STDERR_FILENO), FALSE);
-	if (!data_init(data))
-		return (FALSE);
 	return (TRUE);
 }

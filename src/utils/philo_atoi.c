@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 09:58:03 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/13 13:04:18 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/20 15:43:38 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
@@ -67,7 +67,6 @@ t_bool	philo_atoi(char *str, uint32_t *num)
 		i++;
 	}
 	itoa_res = philo_itoa(*num);
-	dprintf(STDERR_FILENO, BLUE"itoa res: %s\n"RESET, itoa_res);
 	if (!itoa_res)
 		return (FALSE);
 	if (ft_strcmp(str, itoa_res) != 0)

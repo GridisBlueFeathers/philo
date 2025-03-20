@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 17:46:57 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/19 15:53:27 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/20 15:52:01 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
@@ -19,19 +19,19 @@ int32_t	main(int argc, char **argv)
 	t_data	data;
 
 	memset(&data, 0, sizeof(t_data));
-	if (!input_processing(argc, argv, &data))
-		return (1);
+	if (!data_init(&data, argc, argv))
+		return (data_free(&data), 1);
 	dprintf(STDERR_FILENO, BLUE"Philos num: %u\n"RESET, data.num);
 	dprintf(STDERR_FILENO, BLUE"Philos ttd: %u\n"RESET, data.ttd);
 	dprintf(STDERR_FILENO, BLUE"Philos tte: %u\n"RESET, data.tte);
 	dprintf(STDERR_FILENO, BLUE"Philos tts: %u\n"RESET, data.tts);
 	dprintf(STDERR_FILENO, BLUE"Times to eat: %u\n"RESET, data.times_to_eat);
-	return (1);
-	if (!create_nodes())
+	return (data_free(&data), 0);
+	/*if (!create_nodes())
 		return (1);
 	simulation_init();
 	track_finish();
-	join_threads();
+	join_threads();*/
 }
 #else
 

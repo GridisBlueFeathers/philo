@@ -6,7 +6,7 @@
 #    By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/26 15:06:44 by svereten          #+#    #+#              #
-#    Updated: 2025/03/19 15:47:25 by svereten         ###   ########.fr        #
+#    Updated: 2025/03/20 15:50:02 by svereten         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ################################################################################
@@ -28,13 +28,13 @@ SRC_DIR = src
 OBJ_DIR = obj
 
 FILES = main \
-		data \
-		input \
-		node \
-		thread \
 		routine \
 		finish \
+		thread \
 		data/forks \
+		data/data \
+		data/input \
+		data/node \
 		state/methods \
 		state/constructor \
 		simulation/init \
