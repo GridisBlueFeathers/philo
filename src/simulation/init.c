@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 11:08:18 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/20 15:42:14 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/27 14:00:19 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
@@ -29,8 +29,8 @@ static void	start_time_tracking(t_data *data)
 
 void	simulation_init(t_data *data)
 {
-	create_threads(data);
 	data->state->set_start(data->state, FALSE);
+	create_threads(data);
 	start_time_tracking(data);
-	//data(GET)->state->set_start(data(GET)->state, TRUE);
+	data->state->set_start(data->state, TRUE);
 }

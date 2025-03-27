@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:38:18 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/20 15:57:06 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/24 17:55:18 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
@@ -37,24 +37,20 @@ void	forks_assign(t_data *data)
 
 	i = 0;
 	cur = data->head;
-	// handle lone philo
 	while (i < data->num)
 	{
 		if (!i)
-		{
 			cur->one = data->forks[i]->fork;
-			cur->two = data->forks[data->num - 1]->fork;
-		}
 		else if (i % 2 == 0)
-		{
 			cur->one = data->forks[i - 1]->fork;
-			cur->two = data->forks[i]->fork;
-		}
 		else
-		{
 			cur->one = data->forks[i]->fork;
+		if (!i)
+			cur->two = data->forks[data->num - 1]->fork;
+		else if (i % 2 == 0)
+			cur->two = data->forks[i]->fork;
+		else
 			cur->two = data->forks[i - 1]->fork;
-		}
 		i++;
 		cur = cur->next;
 	}

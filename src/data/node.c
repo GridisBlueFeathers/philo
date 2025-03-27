@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:49:55 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/20 15:58:59 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/25 13:39:10 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
@@ -27,6 +27,9 @@ static void	node_connect(t_data *data, t_philo_node *node)
 	data->tail = node;
 }
 
+/**
+ * Timer is included in allocation
+ */
 static t_bool	node_create(t_data *data, uint32_t idx)
 {
 	t_philo_node	*node;
@@ -74,6 +77,6 @@ t_bool	nodes_init(t_data *data)
 	if (data->num > 1)
 		forks_assign(data);
 	else
-		
+		data->head->one = data->forks[0]->fork;
 	return (TRUE);
 }

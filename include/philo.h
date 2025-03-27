@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 17:45:34 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/20 15:51:00 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/25 13:46:33 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PHILO_H
@@ -89,6 +89,17 @@ typedef struct s_fork
 	t_bool			mutex_init;
 }	t_fork;
 
+typedef struct s_start_ts
+{
+	uint64_t		timestamp;
+	pthread_mutex_t	*lock;
+	uint64_t		(*get_timestamp)(struct s_start_ts *);
+	void			(*set_timestamp)(struct s_start_ts *, uint64_t);
+}	t_start_ts;
+
+uint64_t	get_timestamp(struct s_start_ts *self);
+void		set_timestamp(struct s_start_ts *self, uint64_t ts);
+
 typedef struct s_philo_node
 {
 	t_timer				timer;
@@ -96,6 +107,7 @@ typedef struct s_philo_node
 	struct s_philo_node	*prev;
 	struct s_data		*data;
 	t_state				*state;
+	t_start_ts			*start_ts;
 	pthread_mutex_t		*one;
 	pthread_mutex_t		*two;
 	pthread_t			thread;
@@ -113,8 +125,8 @@ typedef struct s_data
 	t_timer			**timers;
 	t_fork			**forks;
 	t_state			*state;
+	t_start_ts		*start_ts;
 	pthread_mutex_t	*data_lock;
-	uint64_t		start_time;
 	uint32_t		ttd;
 	uint32_t		num;
 	uint32_t		nodes_num;
@@ -127,10 +139,14 @@ typedef struct s_data
 //
 t_bool		data_init(t_data *data, int32_t argc, char **argv);
 void		data_free(t_data *data);
+
 t_bool		forks_init(t_data *data);
+void		forks_assign(t_data *data);
 void		forks_free(t_fork **forks);
+
 t_bool		nodes_init(t_data *data);
 void		nodes_free(t_data *data);
+
 t_bool		input_processing(int32_t argc, char **argv, t_data *data);
 
 t_bool		create_nodes(t_data *data);
