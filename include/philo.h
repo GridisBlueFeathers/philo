@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 17:45:34 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/25 13:46:33 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/27 15:00:56 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PHILO_H
@@ -31,6 +31,8 @@
 # define EATING_LOG "%li %d is eating\n"
 # define SLEEPNG_LOG "%li %d is sleeping\n"
 # define THINKING_LOG "%li %d is thinking\n"
+
+# define START_TS_FAIL "start timestamp allocation failed\n"
 
 typedef enum e_bool
 {
@@ -57,21 +59,16 @@ typedef struct s_state
 {
 	pthread_mutex_t	*state_lock;
 	t_bool			start;
-	void			(*set_start)(struct s_state *, t_bool);
-	t_bool			(*get_start)(struct s_state *);
 	t_bool			finish;
-	void			(*set_finish)(struct s_state *, t_bool);
-	t_bool			(*get_finish)(struct s_state *);
 	uint32_t		philos_full;
-	t_bool			(*incr_full)(struct s_state *);
 	uint32_t		philos_num;
 }	t_state;
 
-void		set_start(struct s_state *self, t_bool val);
-t_bool		get_start(struct s_state *self);
-void		set_finish(struct s_state *self, t_bool val);
-t_bool		get_finish(struct s_state *self);
-t_bool		incr_full(struct s_state *self);
+void		state_set_start(t_state *state, t_bool val);
+t_bool		state_get_start(t_state *state);
+void		state_set_finish(t_state *state, t_bool val);
+t_bool		state_get_finish(t_state *state);
+t_bool		state_incr_full(t_state *state);
 t_state		*state_constructor(void);
 void		state_free(t_state *state);
 
@@ -93,12 +90,11 @@ typedef struct s_start_ts
 {
 	uint64_t		timestamp;
 	pthread_mutex_t	*lock;
-	uint64_t		(*get_timestamp)(struct s_start_ts *);
-	void			(*set_timestamp)(struct s_start_ts *, uint64_t);
 }	t_start_ts;
 
-uint64_t	get_timestamp(struct s_start_ts *self);
-void		set_timestamp(struct s_start_ts *self, uint64_t ts);
+uint64_t	start_get_timestamp(t_start_ts *start);
+void		start_set_timestamp(t_start_ts *start, uint64_t ts);
+t_start_ts	*start_ts_constructor(void);
 
 typedef struct s_philo_node
 {
@@ -151,6 +147,11 @@ t_bool		input_processing(int32_t argc, char **argv, t_data *data);
 
 t_bool		create_nodes(t_data *data);
 
+/**
+ * Amount of miliseconds since the start of the universe (epoch)
+ */
+uint64_t	get_timestamp_epoch(void);
+
 t_bool		create_threads(t_data *data);
 void		*routine(void *arg);
 t_bool		join_threads(t_data *data);
@@ -168,7 +169,7 @@ uint8_t		ft_strcmp(char *s1, char *s2);
 t_bool		ft_isdigit(char c);
 t_bool		str_is_number(char *str);
 t_bool		philo_atoi(char *str, uint32_t *num);
-uint64_t	get_timestamp_ms(struct timeval start);
+uint64_t	get_timestamp_ms(void);
 void		print_log(t_print op, uint32_t idx, struct timeval start);
 
 #endif

@@ -6,35 +6,31 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 11:13:02 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/20 15:40:44 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/27 16:11:35 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
 
 static t_bool	check_timer(t_data *data, uint32_t i)
 {
-	(void)data;
-	(void)i;
-	/*uint64_t	now_ts;
+	uint64_t	now_ts;
 
 	pthread_mutex_lock(data->timers[i]->ts_lock);
-	now_ts = get_timestamp_ms(data->start_tv);
+	now_ts = start_get_timestamp(data->start_ts);
 	if (now_ts - data->timers[i]->timestamp >= data->ttd)
 	{
-		pthread_mutex_lock(&data->finish_lock);
-		printf(DIED_LOG, get_timestamp_ms(data->start_tv), i + 1);
-		data->finish = 1;
-		pthread_mutex_unlock(&data->finish_lock);
+		printf(DIED_LOG, now_ts, i + 1);
+		state_set_finish(data->state, TRUE);
 		pthread_mutex_unlock(data->timers[i]->ts_lock);
 		return (FALSE);
 	}
-	pthread_mutex_unlock(data->timers[i]->ts_lock);*/
+	pthread_mutex_unlock(data->timers[i]->ts_lock);
 	return (TRUE);
 }
 
 void	track_finish(t_data *data)
 {
-	uint32_t		i;
+	uint32_t i;
 
 	while (1)
 	{
@@ -45,5 +41,6 @@ void	track_finish(t_data *data)
 				return ;
 			i++;
 		}
+		usleep(1);
 	}
 }

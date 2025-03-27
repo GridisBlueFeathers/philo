@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:48:20 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/20 15:55:25 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/27 14:56:57 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
@@ -21,6 +21,15 @@ void	data_free(t_data *data)
 		state_free(data->state);
 	if (data->head)
 		nodes_free(data);
+	if (data->start_ts)
+	{
+		if (data->start_ts->lock)
+		{
+			pthread_mutex_destroy(data->start_ts->lock);
+			free(data->start_ts->lock);
+		}
+		free(data->start_ts);
+	}
 }
 
 t_bool	data_init(t_data *data, int32_t argc, char **argv)
@@ -33,6 +42,9 @@ t_bool	data_init(t_data *data, int32_t argc, char **argv)
 	data->state = state_constructor();
 	if (!data->state)
 		return (putstr_fd("State allocation failed\n", STDERR_FILENO), FALSE);
+	data->start_ts = start_ts_constructor();
+	if (!data->start_ts)
+		return (FALSE);
 	data->state->philos_num = data->num;
 	if (!forks_init(data))
 		return (putstr_fd("Forks allocation failed\n", STDERR_FILENO), FALSE);

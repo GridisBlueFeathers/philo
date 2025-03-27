@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:53:04 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/25 13:33:46 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/27 15:50:38 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
@@ -23,8 +23,6 @@ t_bool	create_threads(t_data *data)
 	{
 		if (pthread_create(&cur->thread, NULL, routine, cur) < 0)
 			return (FALSE);
-		data->timers[i] = &cur->timer;
-		dprintf(STDERR_FILENO, "%p timer\n", data->timers[i]);
 		i++;
 		cur = cur->next;
 	}
