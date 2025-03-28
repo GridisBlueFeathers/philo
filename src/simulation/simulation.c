@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_log.c                                        :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/13 00:28:20 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/28 14:30:12 by svereten         ###   ########.fr       */
+/*   Created: 2025/03/13 11:08:18 by svereten          #+#    #+#             */
+/*   Updated: 2025/03/28 14:23:32 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
+#include <unistd.h>
 
-void	print_log(t_print op, uint32_t idx, t_start_ts *start, t_state *state)
+void	simulation(t_data *data)
 {
-	if (state_get_finish(state))
-		return ;
-	if (op == FORK)
-		printf(FORK_LOG, start_get_timestamp(start), idx);
-	if (op == EATING)
-		printf(EATING_LOG, start_get_timestamp(start), idx);
-	if (op == SLEEPING)
-		printf(SLEEPNG_LOG, start_get_timestamp(start), idx);
-	if (op == THINKING)
-		printf(THINKING_LOG, start_get_timestamp(start), idx);
+	state_set_start(data->state, FALSE);
+	create_threads(data);
+	start_set_timestamp(data->start_ts, get_timestamp_epoch());
+	state_set_start(data->state, TRUE);
+	track_finish(data);
 }

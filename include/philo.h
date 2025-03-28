@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 17:45:34 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/27 15:00:56 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/28 16:06:42 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PHILO_H
@@ -74,11 +74,13 @@ void		state_free(t_state *state);
 
 typedef struct s_timer
 {
-	struct timeval	start_tv;
 	/* Timestamp of start or last eating start */
 	uint64_t		timestamp;
-	pthread_mutex_t	*ts_lock;
+	pthread_mutex_t	*lock;
 }	t_timer;
+
+void		timer_set_timestamp(t_timer *timer, uint64_t timestamp);
+uint64_t	timer_get_timestamp(t_timer *timer);
 
 typedef struct s_fork
 {
@@ -156,7 +158,7 @@ t_bool		create_threads(t_data *data);
 void		*routine(void *arg);
 t_bool		join_threads(t_data *data);
 
-void		simulation_init(t_data *data);
+void		simulation(t_data *data);
 
 void		track_finish(t_data *data);
 
@@ -170,6 +172,6 @@ t_bool		ft_isdigit(char c);
 t_bool		str_is_number(char *str);
 t_bool		philo_atoi(char *str, uint32_t *num);
 uint64_t	get_timestamp_ms(void);
-void		print_log(t_print op, uint32_t idx, struct timeval start);
+void		print_log(t_print op, uint32_t idx, t_start_ts *start, t_state *state);
 
 #endif

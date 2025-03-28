@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:49:55 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/27 16:03:46 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/28 16:05:40 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
@@ -38,8 +38,8 @@ static t_bool	node_create(t_data *data, uint32_t idx)
 	node = (t_philo_node *)ft_calloc(1, sizeof(t_philo_node));
 	if (!node)
 		return (FALSE);
-	node->timer.ts_lock = (pthread_mutex_t *)ft_calloc(1, sizeof(pthread_mutex_t));
-	if (pthread_mutex_init(node->timer.ts_lock, NULL))
+	node->timer.lock = (pthread_mutex_t *)ft_calloc(1, sizeof(pthread_mutex_t));
+	if (pthread_mutex_init(node->timer.lock, NULL))
 		return (free(node), FALSE);
 	node->idx = idx;
 	node->tte = data->tte;
@@ -61,10 +61,10 @@ void	nodes_free(t_data *data)
 	while (data->nodes_num > 0)
 	{
 		tmp = node->next;
-		if (node->timer.ts_lock)
+		if (node->timer.lock)
 		{
-			pthread_mutex_destroy(node->timer.ts_lock);
-			free(node->timer.ts_lock);
+			pthread_mutex_destroy(node->timer.lock);
+			free(node->timer.lock);
 		}
 		free(node);
 		node = tmp;

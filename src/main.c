@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 17:46:57 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/25 13:31:12 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/28 14:23:24 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
@@ -26,10 +26,9 @@ int32_t	main(int argc, char **argv)
 	dprintf(STDERR_FILENO, BLUE"Philos tte: %u\n"RESET, data.tte);
 	dprintf(STDERR_FILENO, BLUE"Philos tts: %u\n"RESET, data.tts);
 	dprintf(STDERR_FILENO, BLUE"Times to eat: %u\n"RESET, data.times_to_eat);
-	simulation_init(&data);
+	simulation(&data);
 	join_threads(&data);
 	return (data_free(&data), 0);
-	track_finish(&data);
 }
 #else
 
