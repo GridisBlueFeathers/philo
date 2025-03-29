@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 11:13:02 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/29 14:20:25 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/29 14:58:05 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
@@ -27,7 +27,7 @@ static t_bool	check_timer(t_data *data, uint32_t i)
 
 void	track_finish(t_data *data)
 {
-	uint32_t i;
+	uint32_t	i;
 
 	while (!state_get_finish(data->state))
 	{

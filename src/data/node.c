@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:49:55 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/29 14:34:08 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/29 15:03:31 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
@@ -47,7 +47,7 @@ static t_bool	node_create(t_data *data, uint32_t idx)
 	node->times_to_eat = data->times_to_eat;
 	node->data = data;
 	node->state = data->state;
-	node->start_ts = data->start_ts;
+	node->start = data->start_ts;
 	node_connect(data, node);
 	return (TRUE);
 }

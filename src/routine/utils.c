@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 14:10:26 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/29 14:51:45 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/29 15:02:56 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
@@ -19,17 +19,19 @@ void	wait_for_start(t_philo_node *philo)
 }
 
 #if DEBUG
+
 void	take_fork(t_philo_node *philo, t_fork *fork)
 {
 	pthread_mutex_lock(fork->fork);
-	print_log(FORK, philo->idx, philo->start_ts, philo->state);
+	print_log(FORK, philo);
 	dprintf(STDERR_FILENO, BLUE"Fork %u\n"RESET, fork->idx);
 }
 #else
+
 void	take_fork(t_philo_node *philo, t_fork *fork)
 {
 	pthread_mutex_lock(fork->fork);
-	print_log(FORK, philo->idx, philo->start_ts, philo->state);
+	print_log(FORK, philo);
 }
 #endif
 
@@ -37,8 +39,8 @@ void	routine_eat(t_philo_node *philo)
 {
 	take_fork(philo, philo->one);
 	take_fork(philo, philo->two);
-	timer_set_timestamp(&philo->timer, start_get_timestamp(philo->start_ts));
-	print_log(EATING, philo->idx, philo->start_ts, philo->state);
+	timer_set_timestamp(&philo->timer, start_get_timestamp(philo->start));
+	print_log(EATING, philo);
 	philo->times_eaten++;
 	if ((philo->times_to_eat
 			&& philo->times_eaten == philo->times_to_eat
@@ -58,7 +60,7 @@ void	routine_sleep(t_philo_node *philo)
 {
 	if (state_get_finish(philo->state))
 		return ;
-	print_log(SLEEPING, philo->idx, philo->start_ts, philo->state);
+	print_log(SLEEPING, philo);
 	usleep(philo->tts * 1000);
 }
 
@@ -66,6 +68,6 @@ void	routine_think(t_philo_node *philo)
 {
 	if (state_get_finish(philo->state))
 		return ;
-	print_log(THINKING, philo->idx, philo->start_ts, philo->state);
+	print_log(THINKING, philo);
 	usleep(1);
 }

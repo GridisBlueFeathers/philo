@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 17:45:34 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/29 14:40:57 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/29 15:11:02 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PHILO_H
@@ -107,7 +107,7 @@ typedef struct s_philo_node
 	struct s_philo_node	*prev;
 	struct s_data		*data;
 	t_state				*state;
-	t_start_ts			*start_ts;
+	t_start_ts			*start;
 	t_fork				*one;
 	t_fork				*two;
 	pthread_t			thread;
@@ -182,6 +182,6 @@ t_bool		ft_isdigit(char c);
 t_bool		str_is_number(char *str);
 t_bool		philo_atoi(char *str, uint32_t *num);
 uint64_t	get_timestamp_ms(void);
-void		print_log(t_print op, uint32_t idx, t_start_ts *start, t_state *state);
+void		print_log(t_print op, t_philo_node *philo);
 
 #endif
