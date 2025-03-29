@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   simulation.c                                       :+:      :+:    :+:   */
+/*   single_routine.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/13 11:08:18 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/29 14:19:34 by svereten         ###   ########.fr       */
+/*   Created: 2025/03/29 14:08:26 by svereten          #+#    #+#             */
+/*   Updated: 2025/03/29 14:21:01 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
-#include <unistd.h>
 
-void	simulation(t_data *data)
+void	*single_routine(void *arg)
 {
-	state_set_start(data->state, FALSE);
-	create_threads(data);
-	start_set_timestamp(data->start_ts, get_timestamp_epoch());
-	state_set_start(data->state, TRUE);
-	track_finish(data);
+	t_philo_node	*philo;
+
+	philo = (t_philo_node *)arg;
+	wait_for_start(philo);
+	take_fork(philo, philo->one);
+	while (!state_get_finish(philo->state))
+		;
+	return (NULL);
 }

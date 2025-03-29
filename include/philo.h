@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 17:45:34 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/29 13:05:04 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/29 14:17:10 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PHILO_H
@@ -155,7 +155,15 @@ t_bool		create_nodes(t_data *data);
 uint64_t	get_timestamp_epoch(void);
 
 t_bool		create_threads(t_data *data);
+
+void		*single_routine(void *arg);
 void		*routine(void *arg);
+void		wait_for_start(t_philo_node *philo);
+void		take_fork(t_philo_node *philo, pthread_mutex_t *fork);
+void		routine_eat(t_philo_node *philo);
+void		routine_sleep(t_philo_node *philo);
+void		routine_think(t_philo_node *philo);
+
 t_bool		join_threads(t_data *data);
 
 void		simulation(t_data *data);
