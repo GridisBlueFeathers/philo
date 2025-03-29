@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:49:55 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/28 16:05:40 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/29 14:34:08 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
@@ -87,6 +87,6 @@ t_bool	nodes_init(t_data *data)
 	if (data->num > 1)
 		forks_assign(data);
 	else
-		data->head->one = data->forks[0]->fork;
+		data->head->one = data->forks[0];
 	return (TRUE);
 }

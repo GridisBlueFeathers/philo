@@ -6,13 +6,11 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:57:03 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/29 14:14:26 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/29 14:25:43 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
 #include <stdio.h>
-
-
 
 #if DEBUG
 void	*routine(void *arg)

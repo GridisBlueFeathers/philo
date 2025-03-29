@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 17:45:34 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/29 14:17:10 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/29 14:40:57 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PHILO_H
@@ -57,6 +57,7 @@ typedef enum e_print
 
 typedef struct s_state
 {
+	pthread_mutex_t	*print_lock;
 	pthread_mutex_t	*state_lock;
 	t_bool			start;
 	t_bool			finish;
@@ -85,6 +86,7 @@ uint64_t	timer_get_timestamp(t_timer *timer);
 typedef struct s_fork
 {
 	pthread_mutex_t	*fork;
+	uint32_t		idx;
 	t_bool			mutex_init;
 }	t_fork;
 
@@ -106,8 +108,8 @@ typedef struct s_philo_node
 	struct s_data		*data;
 	t_state				*state;
 	t_start_ts			*start_ts;
-	pthread_mutex_t		*one;
-	pthread_mutex_t		*two;
+	t_fork				*one;
+	t_fork				*two;
 	pthread_t			thread;
 	uint32_t			idx;
 	uint32_t			tte;
@@ -159,7 +161,7 @@ t_bool		create_threads(t_data *data);
 void		*single_routine(void *arg);
 void		*routine(void *arg);
 void		wait_for_start(t_philo_node *philo);
-void		take_fork(t_philo_node *philo, pthread_mutex_t *fork);
+void		take_fork(t_philo_node *philo, t_fork *fork);
 void		routine_eat(t_philo_node *philo);
 void		routine_sleep(t_philo_node *philo);
 void		routine_think(t_philo_node *philo);

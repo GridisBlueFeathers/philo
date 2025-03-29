@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:38:18 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/24 17:55:18 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/29 14:50:40 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
@@ -40,17 +40,17 @@ void	forks_assign(t_data *data)
 	while (i < data->num)
 	{
 		if (!i)
-			cur->one = data->forks[i]->fork;
+			cur->one = data->forks[i];
 		else if (i % 2 == 0)
-			cur->one = data->forks[i - 1]->fork;
+			cur->one = data->forks[i];
 		else
-			cur->one = data->forks[i]->fork;
+			cur->one = data->forks[i - 1];
 		if (!i)
-			cur->two = data->forks[data->num - 1]->fork;
+			cur->two = data->forks[data->num - 1];
 		else if (i % 2 == 0)
-			cur->two = data->forks[i]->fork;
+			cur->two = data->forks[i - 1];
 		else
-			cur->two = data->forks[i - 1]->fork;
+			cur->two = data->forks[i];
 		i++;
 		cur = cur->next;
 	}
@@ -76,6 +76,7 @@ t_bool	forks_init(t_data *data)
 		if (pthread_mutex_init(data->forks[i]->fork, NULL))
 			return (FALSE);
 		data->forks[i]->mutex_init = TRUE;
+		data->forks[i]->idx = i;
 		i++;
 	}
 	return (TRUE);
