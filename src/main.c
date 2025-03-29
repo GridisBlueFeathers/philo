@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 17:46:57 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/28 14:23:24 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/29 13:04:34 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
@@ -34,12 +34,13 @@ int32_t	main(int argc, char **argv)
 
 int32_t	main(int argc, char **argv)
 {
-	if (!data(GET))
-	{
-		putstr_fd("data initialization failed\n", STDERR_FILENO);
-		return (1);
-	}
-	if (!input_processing(argc, argv))
-		return (1);
+	t_data	data;
+
+	memset(&data, 0, sizeof(t_data));
+	if (!data_init(&data, argc, argv))
+		return (data_free(&data), 1);
+	simulation(&data);
+	join_threads(&data);
+	return (data_free(&data), 0);
 }
 #endif

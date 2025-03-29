@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 11:13:02 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/28 16:05:00 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/29 12:58:59 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
@@ -15,16 +15,13 @@ static t_bool	check_timer(t_data *data, uint32_t i)
 {
 	uint64_t	now_ts;
 
-	pthread_mutex_lock(data->timers[i]->lock);
 	now_ts = start_get_timestamp(data->start_ts);
-	if (now_ts - data->timers[i]->timestamp >= data->ttd)
+	if (now_ts - timer_get_timestamp(data->timers[i]) >= data->ttd)
 	{
 		printf(DIED_LOG, now_ts, i + 1);
 		state_set_finish(data->state, TRUE);
-		pthread_mutex_unlock(data->timers[i]->lock);
 		return (FALSE);
 	}
-	pthread_mutex_unlock(data->timers[i]->lock);
 	return (TRUE);
 }
 
@@ -32,7 +29,7 @@ void	track_finish(t_data *data)
 {
 	uint32_t i;
 
-	while (1)
+	while (!state_get_finish(data->state))
 	{
 		i = 0;
 		while (i < data->num)
@@ -41,6 +38,6 @@ void	track_finish(t_data *data)
 				return ;
 			i++;
 		}
-		usleep(1);
+		usleep(100);
 	}
 }

@@ -3,3 +3,7 @@ philo
 
 #compiling directories
 obj
+
+#tester
+42-philosophers-tester
+fails
