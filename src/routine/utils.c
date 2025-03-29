@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 14:10:26 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/29 15:02:56 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/29 15:57:32 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
@@ -69,5 +69,5 @@ void	routine_think(t_philo_node *philo)
 	if (state_get_finish(philo->state))
 		return ;
 	print_log(THINKING, philo);
-	usleep(1);
+	usleep(philo->ttt * 1000);
 }

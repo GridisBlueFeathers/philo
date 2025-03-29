@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 17:45:34 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/29 15:11:02 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/29 15:56:26 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PHILO_H
@@ -114,6 +114,8 @@ typedef struct s_philo_node
 	uint32_t			idx;
 	uint32_t			tte;
 	uint32_t			tts;
+	uint32_t			ttt;
+	uint32_t			initial_ttt;
 	uint32_t			times_to_eat;
 	uint32_t			times_eaten;
 }	t_philo_node;
@@ -150,6 +152,9 @@ void		nodes_free(t_data *data);
 t_bool		input_processing(int32_t argc, char **argv, t_data *data);
 
 t_bool		create_nodes(t_data *data);
+
+uint32_t	calculate_ttt(t_data *data);
+uint32_t	calculate_initial_ttt(t_data *data, uint32_t idx);
 
 /**
  * Amount of miliseconds since the start of the universe (epoch)
