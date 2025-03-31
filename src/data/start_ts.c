@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 14:27:22 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/27 15:05:53 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/31 12:11:27 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
@@ -16,7 +16,7 @@ uint64_t	start_get_timestamp(t_start_ts *start)
 	uint64_t		res;
 
 	pthread_mutex_lock(start->lock);
-	res = get_timestamp_epoch() - start->timestamp;
+	res = get_timestamp_epoch_ms() - start->timestamp;
 	pthread_mutex_unlock(start->lock);
 	return (res);
 }

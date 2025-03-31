@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 17:45:34 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/29 15:56:26 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/31 12:10:37 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PHILO_H
@@ -159,7 +159,11 @@ uint32_t	calculate_initial_ttt(t_data *data, uint32_t idx);
 /**
  * Amount of miliseconds since the start of the universe (epoch)
  */
-uint64_t	get_timestamp_epoch(void);
+uint64_t	get_timestamp_epoch_ms(void);
+/**
+ * Amount of microseconds since the start of the universe (epoch)
+ */
+uint64_t	get_timestamp_epoch_us(void);
 
 t_bool		create_threads(t_data *data);
 
@@ -186,6 +190,7 @@ uint8_t		ft_strcmp(char *s1, char *s2);
 t_bool		ft_isdigit(char c);
 t_bool		str_is_number(char *str);
 t_bool		philo_atoi(char *str, uint32_t *num);
+void		philo_sleep(t_state *state, uint64_t usec);
 uint64_t	get_timestamp_ms(void);
 void		print_log(t_print op, t_philo_node *philo);
 

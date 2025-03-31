@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 14:10:26 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/29 15:57:32 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/31 12:08:41 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
@@ -15,7 +15,7 @@
 void	wait_for_start(t_philo_node *philo)
 {
 	while (!state_get_start(philo->state))
-		usleep(100);
+		philo_sleep(philo->state, 100);
 }
 
 #if DEBUG
@@ -51,7 +51,7 @@ void	routine_eat(t_philo_node *philo)
 		pthread_mutex_unlock(philo->two->fork);
 		return ;
 	}
-	usleep(philo->tte * 1000);
+	philo_sleep(philo->state, philo->tte * 1000);
 	pthread_mutex_unlock(philo->one->fork);
 	pthread_mutex_unlock(philo->two->fork);
 }
@@ -61,7 +61,7 @@ void	routine_sleep(t_philo_node *philo)
 	if (state_get_finish(philo->state))
 		return ;
 	print_log(SLEEPING, philo);
-	usleep(philo->tts * 1000);
+	philo_sleep(philo->state, philo->tts * 1000);
 }
 
 void	routine_think(t_philo_node *philo)
@@ -69,5 +69,5 @@ void	routine_think(t_philo_node *philo)
 	if (state_get_finish(philo->state))
 		return ;
 	print_log(THINKING, philo);
-	usleep(philo->ttt * 1000);
+	philo_sleep(philo->state, philo->ttt * 1000);
 }
