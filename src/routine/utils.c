@@ -6,11 +6,10 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 14:10:26 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/31 12:08:41 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/31 14:39:23 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
-#include <stdio.h>
 
 void	wait_for_start(t_philo_node *philo)
 {
@@ -18,22 +17,11 @@ void	wait_for_start(t_philo_node *philo)
 		philo_sleep(philo->state, 100);
 }
 
-#if DEBUG
-
-void	take_fork(t_philo_node *philo, t_fork *fork)
-{
-	pthread_mutex_lock(fork->fork);
-	print_log(FORK, philo);
-	dprintf(STDERR_FILENO, BLUE"Fork %u\n"RESET, fork->idx);
-}
-#else
-
 void	take_fork(t_philo_node *philo, t_fork *fork)
 {
 	pthread_mutex_lock(fork->fork);
 	print_log(FORK, philo);
 }
-#endif
 
 void	routine_eat(t_philo_node *philo)
 {

@@ -6,7 +6,7 @@
 #    By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/26 15:06:44 by svereten          #+#    #+#              #
-#    Updated: 2025/03/31 12:08:55 by svereten         ###   ########.fr        #
+#    Updated: 2025/03/31 14:47:18 by svereten         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ################################################################################
@@ -54,24 +54,11 @@ FILES = main \
 		utils/get_timestamp \
 		utils/print_log \
 
-SRCS = ${FILES:%=${SRC_DIR}/%.c}
 OBJS = ${FILES:%=${OBJ_DIR}/%.o}
 
 OBJ_DIRS = ${sort ${dir ${OBJS}}}
 
 RM = rm -rf
-
-################################################################################
-#
-# Dev variables
-#
-################################################################################
-
-INCLUDE_FILES = ${wildcard include/*.h}
-
-DEBUG = 1
-
-CFLAGS_DEV := ${CFLAGS} -g -D DEBUG=${DEBUG}
 
 ################################################################################
 #
@@ -97,30 +84,5 @@ fclean: clean
 	@${RM} ${NAME}
 
 re: fclean all
-
-################################################################################
-#
-# Dev targets
-#
-################################################################################
-
-helgrind: CFLAGS = ${CFLAGS_DEV}
-helgrind: re
-	valgrind --tool=helgrind ./${NAME} ${ARGS}
-
-valgrind: CFLAGS = ${CFLAGS_DEV}
-valgrind: re
-	valgrind --show-leak-kinds=all --leak-check=full ./${NAME} ${ARGS}
-	
-test: CFLAGS := ${CFLAGS} -D DEBUG=0
-test: re
-	./42-philosophers-tester/test.sh ./philo
-
-norm:
-	norminette ${SRCS} ${INCLUDE_FILES}
-
-run: CFLAGS = ${CFLAGS_DEV}
-run: re
-	@./${NAME} ${ARGS}
 
 .PHONY: all clean fclean re

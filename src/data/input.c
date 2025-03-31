@@ -6,11 +6,10 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 15:12:08 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/31 11:58:31 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/31 14:37:58 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
-#include <unistd.h>
 
 static t_bool	input_validataion(int32_t argc, char **argv)
 {

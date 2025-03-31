@@ -6,25 +6,19 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 17:45:34 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/31 12:10:37 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/31 14:48:13 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PHILO_H
 # define PHILO_H
 
 # include <stdint.h>
+# include <string.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <pthread.h>
 # include <sys/time.h>
-
-# ifndef DEBUG
-#  define DEBUG 1
-# endif
-
-# define BLUE "\x1b[34m"
-# define RESET "\x1b[0m"
 
 # define DIED_LOG "%li %d died\n"
 # define FORK_LOG "%li %d has taken a fork\n"

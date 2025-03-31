@@ -6,11 +6,10 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 09:58:03 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/20 15:43:38 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/31 14:40:19 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
-#include <stdio.h>
 
 static uint32_t	numlen(uint32_t num)
 {

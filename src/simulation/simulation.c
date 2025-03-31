@@ -6,11 +6,10 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 11:08:18 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/31 13:40:36 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/31 14:39:34 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
-#include <unistd.h>
 
 void	simulation(t_data *data)
 {

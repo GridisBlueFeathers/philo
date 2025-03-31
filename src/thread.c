@@ -6,11 +6,10 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:53:04 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/31 13:45:18 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/31 14:45:27 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "philo.h"
-#include <stdio.h>
 
 t_bool	create_threads(t_data *data)
 {
