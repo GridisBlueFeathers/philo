@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 17:45:34 by svereten          #+#    #+#             */
-/*   Updated: 2025/03/31 13:56:31 by svereten         ###   ########.fr       */
+/*   Updated: 2025/03/31 14:36:33 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PHILO_H
@@ -154,14 +154,6 @@ t_bool		create_nodes(t_data *data);
 uint32_t	calculate_ttt(t_data *data);
 uint32_t	calculate_initial_ttt(t_data *data, uint32_t idx);
 
-/**
- * Amount of miliseconds since the start of the universe (epoch)
- */
-uint64_t	get_timestamp_epoch_ms(void);
-/**
- * Amount of microseconds since the start of the universe (epoch)
- */
-uint64_t	get_timestamp_epoch_us(void);
 
 t_bool		create_threads(t_data *data);
 
@@ -181,14 +173,22 @@ void		track_finish(t_data *data);
 
 // Utils
 //
-int32_t		putstr_fd(char *str, int fd);
 void		*ft_calloc(size_t nmemb, size_t size);
-uint32_t	ft_strlen(char *str);
-uint8_t		ft_strcmp(char *s1, char *s2);
 t_bool		ft_isdigit(char c);
-t_bool		str_is_number(char *str);
+uint8_t		ft_strcmp(char *s1, char *s2);
+uint32_t	ft_strlen(char *str);
+/**
+ * Amount of miliseconds since the start of the universe (epoch)
+ */
+uint64_t	get_timestamp_epoch_ms(void);
+/**
+ * Amount of microseconds since the start of the universe (epoch)
+ */
+uint64_t	get_timestamp_epoch_us(void);
 t_bool		philo_atoi(char *str, uint32_t *num);
 void		philo_sleep(t_state *state, uint64_t usec);
 void		print_log(t_print op, t_philo_node *philo);
+int32_t		putstr_fd(char *str, int fd);
+t_bool		str_is_number(char *str);
 
 #endif
